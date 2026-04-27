@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <endpoint name="TestEP" xmlns="http://ws.apache.org/ns/synapse">
-    <address uri="$SYSTEM:hostname"/>
+    <http method="get" uri-template="${configs.hostname}">
+        <suspendOnFailure>
+            <initialDuration>-1</initialDuration>
+            <progressionFactor>1</progressionFactor>
+        </suspendOnFailure>
+        <markForSuspension>
+            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+        </markForSuspension>
+    </http>
 </endpoint>
