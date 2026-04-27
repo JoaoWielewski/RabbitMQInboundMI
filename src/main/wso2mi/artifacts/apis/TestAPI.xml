@@ -7,10 +7,6 @@
                 <property name="username" expression="get-property('env','username')" />
                 <property name="password" expression="get-property('env','password')" />
             </log>
-
-            <call >
-                <endpoint key="TestEP" />
-            </call>
             
             <respond />
         </inSequence>
