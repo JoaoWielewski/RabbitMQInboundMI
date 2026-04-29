@@ -39,4 +39,4 @@ endpoints:
     # Defaults to wild card route if not provided.
     # Applicable only to REST or WS endpoint types.
     # Path should be relative to the docker context.
-    schemaFilePath: swagger/saffron_api-swagger.yaml
+    schemaFilePath: swagger/test-api-swagger.yaml
