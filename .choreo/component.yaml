@@ -13,7 +13,7 @@ schemaVersion: 1.1
 endpoints:
   # +required Unique name for the endpoint.
   # This name will be used when generating the managed API
-  - name: test_ABC_api
+  - name: testendpoint
     # +optional Display name for the endpoint.
     displayName: Test ABC Integration App
 
