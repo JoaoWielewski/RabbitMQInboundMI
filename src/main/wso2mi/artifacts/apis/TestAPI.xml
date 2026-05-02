@@ -4,14 +4,11 @@
         <inSequence>
             <log category="INFO" level="custom">
                 <property name="connection_name" scope="default" type="STRING" expression="${configs.hostname}"/>
-                <property name="hostname" expression="get-property('env','hostname')" />
-                <property name="username" expression="get-property('env','username')" />
-                <property name="password" expression="get-property('env','password')" />
             </log>
 
-            <!-- <call >
+            <call >
                 <endpoint key="TestEP" />
-            </call> -->
+            </call>
             
             <respond />
         </inSequence>
