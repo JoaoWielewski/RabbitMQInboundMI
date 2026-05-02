@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="TestProxyRead" startOnLoad="true" transports="http https"
+    xmlns="http://ws.apache.org/ns/synapse">
+    <target>
+        <inSequence>
+            <dblookup>
+                <connection>
+                    <pool>
+                        <driver>org.postgresql.Driver</driver>
+                        <url>jdbc:postgresql://ep-wispy-rain-ac7nolsm-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require&amp;channel_binding=require</url>
+                        <user>neondb_owner</user>
+                        <password>npg_xs8BKlr7QWhi</password>
+                    </pool>
+                </connection>
+                <statement>
+                    <sql><![CDATA[SELECT COALESCE(json_agg(row_to_json(t))::text, '[]') AS messages FROM (SELECT message FROM MESSAGE) t]]></sql>
+                    <result name="messages_json" column="messages"/>
+                </statement>
+            </dblookup>
+
+            <log level="custom">
+                <property name="result" expression="get-property('messages_json')"/>
+            </log>
+
+            <payloadFactory media-type="json">
+                <format>{"status":"OK","data":$1}</format>
+                <args>
+                    <arg evaluator="xml" expression="get-property('messages_json')"/>
+                </args>
+            </payloadFactory>
+            <property name="messageType" value="application/json" scope="axis2"/>
+            <respond/>
+        </inSequence>
+        <faultSequence/>
+    </target>
+</proxy>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="TestProxyWrite" startOnLoad="true" transports="http https"
+    xmlns="http://ws.apache.org/ns/synapse">
+    <target>
+        <inSequence>
+            <property name="msgValue"
+                      expression="json-eval($.message)"
+                      scope="default"
+                      type="STRING"/>
+
+            <log level="custom">
+                <property name="captured" expression="$ctx:msgValue"/>
+            </log>
+
+            <dbreport>
+                <connection>
+                    <pool>
+                        <driver>org.postgresql.Driver</driver>
+                        <url>jdbc:postgresql://ep-wispy-rain-ac7nolsm-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require&amp;channel_binding=require</url>
+                        <user>neondb_owner</user>
+                        <password>npg_xs8BKlr7QWhi</password>
+                    </pool>
+                </connection>
+                <statement>
+                    <sql><![CDATA[INSERT INTO MESSAGE (message) VALUES (?)]]></sql>
+                    <parameter expression="get-property('msgValue')" type="VARCHAR"/>
+                </statement>
+            </dbreport>
+
+            <payloadFactory media-type="json">
+                <format>{"status":"OK","saved":"$1"}</format>
+                <args>
+                    <arg expression="$ctx:msgValue"/>
+                </args>
+            </payloadFactory>
+            <property name="messageType" value="application/json" scope="axis2"/>
+            <respond/>
+        </inSequence>
+        <faultSequence/>
+    </target>
+</proxy>
