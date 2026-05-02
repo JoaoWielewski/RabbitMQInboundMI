@@ -1,26 +1,16 @@
-# +required Schema version
 schemaVersion: 1.2
 
-# +optional Incoming connection details for the component
 endpoints:
 
-  # ===== Proxy de escrita =====
   - name: test-proxy-write
     displayName: Test Proxy Write
     service:
-      # base path: o MI expõe proxies em /services/<nome>
       basePath: /services/TestProxyWrite
-      # porta padrão do MI para HTTP
       port: 8290
-    # REST porque você está enviando/recebendo JSON via HTTP
     type: REST
-    # Public = exposto via API Gateway do Choreo na internet
-    # Organization = só dentro da sua org
-    # Project = só componentes do mesmo projeto
     networkVisibilities:
       - Public
 
-  # ===== Proxy de leitura =====
   - name: test-proxy-read
     displayName: Test Proxy Read
     service:
