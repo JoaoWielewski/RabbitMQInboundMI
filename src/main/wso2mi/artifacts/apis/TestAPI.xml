@@ -4,8 +4,6 @@
         <inSequence>
             <log category="INFO" level="custom">
                 <property name="hostname" expression="get-property('env','hostname')" />
-                <property name="username" expression="get-property('env','username')" />
-                <property name="password" expression="get-property('env','password')" />
             </log>
 
             <call >
