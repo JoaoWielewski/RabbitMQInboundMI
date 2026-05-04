@@ -27,4 +27,20 @@
         <faultSequence/>
     </resource>
 
+    <resource methods="GET" uri-template="/test">
+        <inSequence>
+            <log category="INFO" level="custom">
+                <property name="connection_name" scope="default" type="STRING" expression="${configs.hostname}"/>
+            </log>
+
+            <call >
+                <endpoint key="TestEP" />
+            </call>
+            
+            <respond />
+        </inSequence>
+        <faultSequence>
+        </faultSequence>
+    </resource>
+
 </api>

@@ -31,3 +31,8 @@ paths:
       responses:
         default:
           description: Default response
+  /test:
+    get:
+      responses:
+        default:
+          description: Default response
