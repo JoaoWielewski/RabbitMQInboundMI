@@ -1,11 +1,11 @@
 openapi: 3.0.1
 info:
-  title: DatabaseAPI
-  description: API Definition of DatabaseAPI
+  title: SampleAPI
+  description: API Definition of SampleAPI
   version: 1.0.0
 servers:
-- url: http://localhost:8290/databaseapi
-- url: https://localhost:8253/databaseapi
+- url: http://localhost:8290/sampleapi
+- url: https://localhost:8253/sampleapi
 paths:
   /messages:
     get:
