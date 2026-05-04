@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/databaseapi" name="DatabaseAPI" xmlns="http://ws.apache.org/ns/synapse">
+
+    <resource methods="GET" uri-template="/messages">
+        <inSequence>
+            <call>
+                <endpoint>
+                    <http method="GET" uri-template="http://localhost:8290/services/TestProxyRead"/>
+                </endpoint>
+            </call>
+            <respond/>
+        </inSequence>
+        <faultSequence/>
+    </resource>
+
+    <resource methods="POST" uri-template="/messages">
+        <inSequence>
+            <property name="messageType" value="application/json" scope="axis2"/>
+            <property name="ContentType" value="application/json" scope="axis2"/>
+            <call>
+                <endpoint>
+                    <http method="POST" uri-template="http://localhost:8290/services/TestProxyWrite"/>
+                </endpoint>
+            </call>
+            <respond/>
+        </inSequence>
+        <faultSequence/>
+    </resource>
+
+</api>
