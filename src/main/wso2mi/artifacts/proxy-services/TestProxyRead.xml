@@ -13,7 +13,7 @@
                     </pool>
                 </connection>
                 <statement>
-                    <sql><![CDATA[SELECT COALESCE(json_agg(row_to_json(t))::text, '[]') AS messages FROM (SELECT message FROM MESSAGE) t]]></sql>
+                    <sql><![CDATA[SELECT COALESCE(json_agg(row_to_json(t))::text, '[]') AS messages FROM (SELECT message, created_at FROM MESSAGE ORDER BY created_at DESC) t]]></sql>
                     <result name="messages_json" column="messages"/>
                 </statement>
             </dblookup>
