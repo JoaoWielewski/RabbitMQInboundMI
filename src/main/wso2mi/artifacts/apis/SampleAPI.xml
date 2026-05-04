@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<api context="/databaseapi" name="DatabaseAPI" xmlns="http://ws.apache.org/ns/synapse">
+<api context="/sampleapi" name="SampleAPI" xmlns="http://ws.apache.org/ns/synapse">
 
     <resource methods="GET" uri-template="/messages">
         <inSequence>
